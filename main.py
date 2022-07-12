@@ -1,8 +1,9 @@
 import discord
 import discord.ext
 from discord.ext import commands
+from discord_slash import SlashCommand, SlashContext
 
-bot = commands.Bot(command_prefix="mu:", help_command=None)
+bot = commands.Bot(command_prefix="mu:", intents=discord.Intents.all())
 
 with open('/home/mumeinosato/discord-bot/token.txt', 'r') as fin:
     content = fin.read()
