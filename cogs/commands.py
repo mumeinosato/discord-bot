@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
 
-class mycog(commands.Cog):
+class commands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
