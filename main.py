@@ -13,9 +13,9 @@ token = content
 print("起動しました")
 
 @slash.command(
-    name="help",
-    description="helpを表示します" ,
-    guild_ids=test_guilds
+    name =" help",
+    description =" helpを表示します" ,
+    guild_ids = test_guilds
 )
 async def help(inter):#コマンドを定義するときの関数は必ずContextという引数が渡される。つまり引数を最低一つだけでも書いておかないと動かないので注意
     embed = discord.Embed(title="ヘルプ", description="このヘルプコマンドにはプレフィックスを書いていないため、\n実行には全て`mu:コマンド名`とする必要があります。",color=0x4169e1)
