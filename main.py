@@ -3,6 +3,7 @@ import discord.ext
 from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
 import traceback
+from cogs import commands
 
 bot = commands.Bot(command_prefix="mu:", help_command=None)
 slash = InteractionClient(bot)
@@ -16,7 +17,8 @@ token = content
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Game(f"ヘルプは mu:help | 導入サーバー数: {len(bot.guilds)}"))
-print("起動しました")
+    await bot.add_cog(commands(bot))
+    print("起動しました")
 
 @slash.command(
     name="help",
@@ -58,7 +60,7 @@ async def register_word(inter, text=None):
 #)
 #async def markovi(inter):
 
-from cogs import commands
-bot.add_cog(commands(bot))
+
+
 
 bot.run(token)
