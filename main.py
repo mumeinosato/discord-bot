@@ -5,7 +5,7 @@ from dislash import InteractionClient, slash_commands, Option, OptionType
 
 bot = commands.Bot(command_prefix="mu:", help_command=None)
 slash = InteractionClient(bot)
-test_guilds = [945916362872746034, 861202670768750612]
+test_guilds = [945916362872746034]
 
 with open('/home/mumeinosato/discord-bot/token.txt', 'r') as fin:
     content = fin.read()
