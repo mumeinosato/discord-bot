@@ -9,4 +9,4 @@ with open('/home/mumeinosato/discord-bot/token.txt', 'r') as fin:
 token = content
 print("起動しました")
 
-bot.run('token')
+bot.run(token)
