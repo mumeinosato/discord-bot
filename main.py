@@ -58,11 +58,7 @@ async def register_word(inter, text=None):
 #)
 #async def markovi(inter):
 
-INITIAL_EXTENSIONS = [
-     'cogs.commands'
-]
-for cog in INITIAL_EXTENSIONS:
-     bot.load_extension(cog)         
-
+from cogs import commands
+bot.add_cog(commands.commands(bot))
 
 bot.run(token)
