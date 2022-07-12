@@ -16,4 +16,4 @@ async def _slash_help(ctx: SlashContext):
 async def on_ready():
   print('bot ready.')
 
-bot.run("OTM2ODY4NzcxMzcxNTY5MjAz.YfTdCQ.rLD9Rdm-s7SOLEN5OjUgOy7mNFs")
+bot.run("")
