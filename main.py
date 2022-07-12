@@ -2,6 +2,7 @@ import discord
 import discord.ext
 from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
+import traceback
 
 bot = commands.Bot(command_prefix="mu:", help_command=None)
 slash = InteractionClient(bot)
@@ -55,5 +56,18 @@ async def register_word(inter, text=None):
 #)
 #async def markovi(inter):
     
+INITIAL_EXTENSIONS = ['cogs.commands']
+class commands(commands.Bot):
+    def __init__(self, command_prefix):
+        # スーパークラスのコンストラクタに値を渡して実行。
+        super().__init__(command_prefix)
+
+        # INITIAL_COGSに格納されている名前から、コグを読み込む。
+        # エラーが発生した場合は、エラー内容を表示。
+        for cog in INITIAL_EXTENSIONS:
+            try:
+                self.load_extension(cog)
+            except Exception:
+                traceback.print_exc()
 
 bot.run(token)
