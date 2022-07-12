@@ -2,12 +2,11 @@ import discord
 import discord.ext
 from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
-import subprocess
-from subprocess import PIPE
 
 bot = commands.Bot(command_prefix="mu:", help_command=None)
 slash = InteractionClient(bot)
 test_guilds = [706416588160499793]
+
 
 with open('/home/mumeinosato/discord-bot/token.txt', 'r') as fin:
     content = fin.read()
@@ -51,12 +50,14 @@ async def register_word(inter, text=None):
     else:
         await inter.reply('引数がありません')
 
-@slash.command(
-    nmae="markovi",
-    description="文を自動生成します" ,
-    guild_ids=test_guilds    
-)
-async def markovi(inter):
-    proc = subprocess.run(['python', 'marukovi.py'], stdout=PIPE, stderr=PIPE)
+#@slash.command(
+#    nmae="markovi",
+#    description="文を自動生成します" ,
+#    guild_ids=test_guilds    
+#)
+#async def markovi(inter):
+    
+
+
 
 bot.run(token)
