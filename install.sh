@@ -1,2 +1,2 @@
 pip3 install discord.py
-pip3 install discord-interactions
+pip3 install dislash.py
