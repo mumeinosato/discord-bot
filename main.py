@@ -42,8 +42,9 @@ async def help(inter):#コマンドを定義するときの関数は必ずContex
 async def register_word(inter, text=None):
     if text is not None:
         f = open('/home/mumeinosato/discord-bot/markovi.txt', 'a', encoding='UTF-8')
-        f.write(text)
+        f.write(text+"\n")
         f.close()
+        await inter.reply("登録しました")
     else:
         await inter.reply('引数がありません')
 
