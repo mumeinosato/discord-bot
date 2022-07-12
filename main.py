@@ -31,6 +31,21 @@ async def help(inter):#コマンドを定義するときの関数は必ずContex
     embed.add_field(name="**myinformation 〔パスワード〕**", value="登録内容を表示します。（パスワードを持っている場合のみアクセスできます。)",inline=False)
     await inter.send(embed=embed)#Contextにはいろいろな情報が入っており、そこから様々な関数、情報にアクセスできる。ctx.sendがその一つ
 
+@slash.command(
+    nmae="register_word",
+    description="AIの語句登録をします" ,
+    options = [
+        Option('text', '登録する語句', OptionType.STRING),
+    ],
+    guild_ids=test_guilds    
+)
+async def register_word(inter, text=None):
+    if text is not None:
+        f = open('/home/mumeinosato/discord-bot/markovi.txt', 'a', encoding='UTF-8')
+        f.write(text)
+        f.close()
+    else:
+        await inter.reply('引数がありません')
 
 
 bot.run(token)
