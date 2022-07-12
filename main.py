@@ -59,6 +59,6 @@ async def register_word(inter, text=None):
 #async def markovi(inter):
 
 from cogs import commands
-bot.add_cog(commands.commands(bot))
+bot.add_cog(commands(bot))
 
 bot.run(token)
