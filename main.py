@@ -12,6 +12,10 @@ test_guilds = [706416588160499793]
 with open('/home/mumeinosato/discord-bot/token.txt', 'r') as fin:
     content = fin.read()
 token = content
+
+@bot.event
+async def on_ready():
+    await bot.change_presence(activity=discord.Game(f"ヘルプは mu:help | 導入サーバー数: {len(bot.guilds)}"))
 print("起動しました")
 
 @slash.command(
@@ -28,8 +32,6 @@ async def help(inter):#コマンドを定義するときの関数は必ずContex
     embed.add_field(name="**game**", value="このbotでできるゲーム一覧を表示します。",inline=False)
     embed.add_field(name="**tool**", value="便利ツール一覧を表示します。",inline=False)
     embed.add_field(name="**servermanagement**", value="サーバー運営に役立つコマンド一覧を表示します。", inline=False)
-    embed.add_field(name="**partner**", value="提携しているもの一覧を表示します。",inline=False)
-    embed.add_field(name="**myinformation 〔パスワード〕**", value="登録内容を表示します。（パスワードを持っている場合のみアクセスできます。)",inline=False)
     await inter.send(embed=embed)#Contextにはいろいろな情報が入っており、そこから様々な関数、情報にアクセスできる。ctx.sendがその一つ
 
 @slash.command(
@@ -55,19 +57,12 @@ async def register_word(inter, text=None):
 #    guild_ids=test_guilds    
 #)
 #async def markovi(inter):
-    
-#INITIAL_EXTENSIONS = ['cogs.commands']
-#class commands(commands.Bot):
-#    def __init__(self, command_prefix):
-#        # スーパークラスのコンストラクタに値を渡して実行。
-#        super().__init__(command_prefix)
-#
-#        # INITIAL_COGSに格納されている名前から、コグを読み込む。
-#        # エラーが発生した場合は、エラー内容を表示。
-#        for cog in INITIAL_EXTENSIONS:
-#            try:
-#                self.load_extension(cog)
-#            except Exception:
-#                traceback.print_exc()
+
+INITIAL_EXTENSIONS = [
+     'cogs.commands'
+]
+for cog in INITIAL_EXTENSIONS:
+     bot.load_extension(cog)         
+
 
 bot.run(token)
