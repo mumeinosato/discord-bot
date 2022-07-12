@@ -2,8 +2,8 @@ import discord
 import discord.ext
 from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
-import traceback
-from cogs import commands
+#import traceback
+#from cogs import commands
 
 bot = commands.Bot(command_prefix="mu:", help_command=None)
 slash = InteractionClient(bot)
