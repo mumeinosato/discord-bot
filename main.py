@@ -54,6 +54,7 @@ async def register_word(inter, text=None):
     else:
         await inter.reply('引数がありません')
 
+""""
 @slash.command(
     nmae="mcid",
     description="Minecraftのユーザー情報を検索します(javaのみ)" ,
@@ -66,6 +67,7 @@ async def register_word(inter, text=None):
         await inter.reply("https://ja.namemc.com/profile/"+text)
     else:
         await inter.reply('MCIDを入力してください')
+"""
 
 @bot.event
 async def on_message(message):
