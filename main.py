@@ -1,5 +1,3 @@
-from tkinter import E
-import discord
 import discord.ext
 from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
