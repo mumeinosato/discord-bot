@@ -1,4 +1,3 @@
-from tkinter import E
 import discord
 import discord.ext
 from discord.ext import commands
@@ -56,16 +55,7 @@ async def register_word(inter, text=None):
     else:
         await inter.reply('引数がありません')
 
-@slash.command(
-    nmae="ai_stop",
-    description="自動返信を停止します" ,
-)
-async def ai_stop(inter):
-    if talkai == 1:
-        talkai = 0
-    else:
-        talkai = 1
-
+@bot.command()
 async def on_message(message):
     if message.author.bot:
         return
