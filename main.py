@@ -3,7 +3,6 @@ import discord.ext
 from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
 #import traceback
-#from cogs import commands
 
 bot = commands.Bot(command_prefix="mu:", help_command=None)
 slash = InteractionClient(bot)
@@ -17,7 +16,8 @@ token = content
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Game(f"ヘルプは mu:help | 導入サーバー数: {len(bot.guilds)}"))
-    #await bot.add_cog(commands(bot))
+    from cogs import commands
+    await bot.add_cog(commands.setup(bot))
     print("起動しました")
 
 @slash.command(
