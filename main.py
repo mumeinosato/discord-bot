@@ -16,9 +16,10 @@ token = content
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Game(f"ヘルプは mu:help | 導入サーバー数: {len(bot.guilds)}"))
-    from cogs import commands
-    await bot.add_cog(commands.setup(bot))
     print("起動しました")
+    from cogs import commands, Global_chat
+    await bot.add_cog(commands.commandscog(bot))
+    await bot.add_cog(Global_chat.globalCog(bot))
 
 @slash.command(
     name="help",

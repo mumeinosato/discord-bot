@@ -1,3 +1,4 @@
+from pickle import GLOBAL
 import discord
 from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
@@ -19,6 +20,6 @@ class commands(commands.Cog):
         embed.add_field(name="**servermanagement**", value="サーバー運営に役立つコマンド一覧を表示します。", inline=False)
         await ctx.send(embed=embed)#Contextにはいろいろな情報が入っており、そこから様々な関数、情報にアクセスできる。ctx.sendがその一つ
 
-def setup(bot):
+def comanndscog(bot):
     print('commandsファイルを読み込んだよ！')
     bot.add_cog(commands(bot))        
