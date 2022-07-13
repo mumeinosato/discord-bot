@@ -12,7 +12,7 @@ test_guilds = [706416588160499793]
 
 with open('/home/mumeinosato/discord-bot/token.txt', 'r') as fin:
     content = fin.read()
-TALK_API_KEY  = content
+TALK_API_KEY = content
 
 with open('/home/mumeinosato/discord-bot/talkapi.txt', 'r') as fin:
     talkapi = fin.read()
