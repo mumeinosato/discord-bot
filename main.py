@@ -78,9 +78,8 @@ async def on_message(message):
     else:
         with open('/home/mumeinosato/discord-bot/aitext.txt', 'r') as fin:
             aisel = fin.read()
-        seltxet = [0, 1, 2, 3, 4]
-        print(random.choice(seltxet))
-        await message.channel.send(random.choice(seltxet))
+        print(aisel)
+        await message.channel.send(random.choice(aisel))
 
     await bot.process_commands(message)
 
