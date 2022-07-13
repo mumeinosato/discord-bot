@@ -2,8 +2,7 @@ import discord
 import discord.ext
 from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
-import sys 
-import pya3rt 
+import random
 #import traceback
 
 bot = commands.Bot(command_prefix="mu:", help_command=None)
@@ -47,8 +46,8 @@ async def help(inter):#コマンドを定義するときの関数は必ずContex
 )
 async def register_word(inter, text=None):
     if text is not None:
-        f = open('/home/mumeinosato/discord-bot/markovi.txt', 'a', encoding='UTF-8')
-        f.write(text+"\n")
+        f = open('/home/mumeinosato/discord-bot/aitext.txt', 'a', encoding='UTF-8')
+        f.write(text+", ")
         f.close()
         await inter.reply("登録しました")
         print(text+"が登録されました")
@@ -76,5 +75,12 @@ async def on_message(message):
         for channel in global_channels:# メッセージを埋め込み形式で転送
             await channel.send(embed=embed)
 
+    else:
+        with open('/home/mumeinosato/discord-bot/aitext.txt', 'r') as fin:
+            aisel = fin.read()
+        seltxet = [0, 1, 2, 3, 4]
+        await message.channel.send(random.choice(seltxet))
+
+    await bot.process_commands(message)
 
 bot.run(token)
