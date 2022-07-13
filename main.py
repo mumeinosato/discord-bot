@@ -5,10 +5,6 @@ import sys
 import pya3rt 
 #import traceback
 
-bot = commands.Bot(command_prefix="mu:", help_command=None)
-slash = InteractionClient(bot)
-test_guilds = [706416588160499793]
-
 with open('/home/mumeinosato/discord-bot/token.txt', 'r') as fin:
     content = fin.read()
 token = content
@@ -16,11 +12,10 @@ token = content
 with open('/home/mumeinosato/discord-bot/talkapi.txt', 'r') as fin:
     talkapi = fin.read()
 TALK_API_KEY = talkapi
-chat_client = pya3rt.TalkClient(TALK_API_KEY)
 
-async def greeting():
-    greet = bot.get_channel(706416588160499796)
-    await greet.send('起動しました')
+bot = commands.Bot(command_prefix="mu:", help_command=None), pya3rt.TalkClient(TALK_API_KEY)
+slash = InteractionClient(bot)
+test_guilds = [706416588160499793]
 
 @bot.event
 async def on_ready():
@@ -73,9 +68,6 @@ async def ai_stop(inter):
     else:
         talkai = 1
 
-@bot.event
-async def on_ready():
-    await greeting()
 
 async def on_message(message):
     if message.author.bot:
@@ -97,13 +89,13 @@ async def on_message(message):
         for channel in global_channels:# メッセージを埋め込み形式で転送
             await channel.send(embed=embed)
 
-    if message.content == '!exit':
-        await message.channel.send("またね！")
-        sys.exit()
-    #他の時は送ったメッセージに対して反応してくれる
-    else:
-        response = chat_client.talk(message)
-        await message.channel.send((chat_client.talk(message.content)['results'][0]['reply']))        
+    elif message.content.startswith('こんにちは'):
+            channel_name = message.content.replace('こんにちは', '')
+            channel = discord.utils.get(message.guild.channels, name=channel_name)
+            last_msg = await channel.fetch_message(channel.last_message_id)
+            last_msg_content = last_msg.content
+            response = bot.talk(last_msg_content)
+            await message.channel.send(((response['results'])[0])['reply'])
     
     await bot.process_commands(message)
 
