@@ -20,7 +20,7 @@ async def on_ready():
     from cogs import commands
     from cogs import Global_chat
     await bot.add_cog(commands.commands(bot))
-    #await bot.add_cog(Global_chat.globalCog(bot))
+    #await bot.add_cog(Gchat.globalCog(bot))
 
 @slash.command(
     name="help",

@@ -6,7 +6,7 @@ from numpy import tile
 
 GLOBAL_CH_NAME = "mumeinosato-global"
 
-class globalCog(commands.Cog):
+class Gchat(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -29,6 +29,6 @@ class globalCog(commands.Cog):
                     await channel.send(embed=embed)
         
 
-def globalCog(bot):
-    print('globalCogファイルを読み込んだよ！')
-    bot.add_cog(globalCog(bot))   
+def Gchat(bot):
+    print('Gchatファイルを読み込んだよ！')
+    bot.add_cog(Gchat(bot))   
