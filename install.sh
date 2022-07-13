@@ -5,3 +5,4 @@ pip3 install markovify
 pip3 install subprocess
 pip3 install numpy
 pip3 install pya3rt
+pip3 install Janome
