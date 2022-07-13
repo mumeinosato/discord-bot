@@ -47,12 +47,25 @@ async def help(inter):#コマンドを定義するときの関数は必ずContex
 async def register_word(inter, text=None):
     if text is not None:
         f = open('/home/mumeinosato/discord-bot/aitext.txt', 'a', encoding='UTF-8')
-        f.write(text+", ")
+        f.write("'"+text+"', ")
         f.close()
         await inter.reply("登録しました")
         print(text+"が登録されました")
     else:
         await inter.reply('引数がありません')
+
+@slash.command(
+    nmae="mcid",
+    description="Minecraftのユーザー情報を検索します(java飲み)" ,
+    options = [
+        Option('mcid', 'MCID', OptionType.STRING),
+    ],
+)
+async def register_word(inter, text=None):
+    if text is not None:
+        await inter.reply("https://ja.namemc.com/profile/"+text)
+    else:
+        await inter.reply('MCIDを入力してください')
 
 @bot.event
 async def on_message(message):
@@ -79,7 +92,8 @@ async def on_message(message):
         with open('/home/mumeinosato/discord-bot/aitext.txt', 'r') as fin:
             aisel = fin.read()
         print(aisel)
-        await message.channel.send(random.choice(aisel))
+        seltxt = [aisel]
+        await message.channel.send(random.choice(seltxt))
 
     await bot.process_commands(message)
 
