@@ -65,10 +65,10 @@ async def register_word(inter, text=None):
         await inter.reply('引数がありません')
 
 @slash.command(
-    nmae="AI_Stop",
+    nmae="ai_stop",
     description="自動返信を停止します" ,
 )
-async def AI_Stop(inter):
+async def ai_stop(inter):
     talkai = 0
 
 @bot.event
