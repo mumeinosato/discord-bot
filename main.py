@@ -56,7 +56,7 @@ async def register_word(inter, text=None):
 
 @slash.command(
     nmae="mcid",
-    description="Minecraftのユーザー情報を検索します(java飲み)" ,
+    description="Minecraftのユーザー情報を検索します(javaのみ)" ,
     options = [
         Option('mcid', 'MCID', OptionType.STRING),
     ],
