@@ -2,16 +2,26 @@ import discord
 import discord.ext
 from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
+import sys 
+import pya3rt 
 #import traceback
 
 bot = commands.Bot(command_prefix="mu:", help_command=None)
 slash = InteractionClient(bot)
 test_guilds = [706416588160499793]
 
-
 with open('/home/mumeinosato/discord-bot/token.txt', 'r') as fin:
     content = fin.read()
-token = content
+TALK_API_KEY  = content
+
+with open('/home/mumeinosato/discord-bot/talkapi.txt', 'r') as fin:
+    talkapi = fin.read()
+token = talkapi
+chat_client = pya3rt.TalkClient(TALK_API_KEY)
+
+async def greeting():
+    greet = bot.get_channel(706416588160499796)
+    await greet.send('起動しました')
 
 @bot.event
 async def on_ready():
@@ -54,7 +64,17 @@ async def register_word(inter, text=None):
     else:
         await inter.reply('引数がありません')
 
+@slash.command(
+    nmae="AI_Stop",
+    description="自動返信を停止します" ,
+)
+async def AI_Stop(inter):
+    talkai = 0
+
 @bot.event
+async def on_ready():
+    await greeting()
+
 async def on_message(message):
     if message.author.bot:
         return
@@ -74,6 +94,14 @@ async def on_message(message):
             icon_url=message.guild.icon_url_as(format="png"))# Embedインスタンスを生成、投稿者、投稿場所などの設定
         for channel in global_channels:# メッセージを埋め込み形式で転送
             await channel.send(embed=embed)
+
+    if message.content == '!exit':
+        await message.channel.send("またね！")
+        sys.exit()
+    #他の時は送ったメッセージに対して反応してくれる
+    else:
+        response = chat_client.talk(message)
+        await message.channel.send((chat_client.talk(message.content)['results'][0]['reply']))        
     
     await bot.process_commands(message)
 
