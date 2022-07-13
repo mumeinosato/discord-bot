@@ -1,3 +1,4 @@
+from tkinter import E
 import discord
 import discord.ext
 from discord.ext import commands
@@ -12,11 +13,11 @@ test_guilds = [706416588160499793]
 
 with open('/home/mumeinosato/discord-bot/token.txt', 'r') as fin:
     content = fin.read()
-TALK_API_KEY = content
+token = content
 
 with open('/home/mumeinosato/discord-bot/talkapi.txt', 'r') as fin:
     talkapi = fin.read()
-token = talkapi
+TALK_API_KEY = talkapi
 chat_client = pya3rt.TalkClient(TALK_API_KEY)
 
 async def greeting():
@@ -69,7 +70,10 @@ async def register_word(inter, text=None):
     description="自動返信を停止します" ,
 )
 async def ai_stop(inter):
-    talkai = 0
+    if talkai == 1:
+        talkai = 0
+    else:
+        talkai = 1
 
 @bot.event
 async def on_ready():
