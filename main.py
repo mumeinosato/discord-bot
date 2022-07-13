@@ -54,7 +54,7 @@ async def register_word(inter, text=None):
     else:
         await inter.reply('引数がありません')
 
-@bot.event()
+@bot.event
 async def on_message(message):
     if message.author.bot:
         return
