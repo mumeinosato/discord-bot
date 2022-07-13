@@ -3,7 +3,6 @@ import discord
 from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
 
-GLOBAL_CH_NAME = "mumeinosato-global"
 
 class commands(commands.Cog):
     def __init__(self, bot):
@@ -21,26 +20,11 @@ class commands(commands.Cog):
         embed.add_field(name="**tool**", value="便利ツール一覧を表示します。",inline=False)
         embed.add_field(name="**servermanagement**", value="サーバー運営に役立つコマンド一覧を表示します。", inline=False)
         await ctx.send(embed=embed)#Contextにはいろいろな情報が入っており、そこから様々な関数、情報にアクセスできる。ctx.sendがその一つ
-
-        @commands.Cog.listener(name='on_message')
-        async def good_reaction(self, message):
-            if message.author.bot:
-                return
-            if message.channel.name == GLOBAL_CH_NAME:                                                          
-                print("success")
-                await message.delete() # 元のメッセージは削除しておく
-                channels = self.bot.get_all_channels()
-                global_channels = [ch for ch in channels if ch.name == GLOBAL_CH_NAME]
-                embed = discord.Embed(
-                    description=message.content, color=0x00bfff)
-                embed.set_author(name=message.author.display_name,                                                                            
-                    icon_url=message.author.avatar_url_as(format="png"))
-                embed.set_footer(text=f"{message.guild.name} / {message.channel.name}",
-                    icon_url=message.guild.icon_url_as(format="png"))# Embedインスタンスを生成、投稿者、投稿場所などの設定
-                for channel in global_channels:# メッセージを埋め込み形式で転送
-                    await channel.send(embed=embed)
         
-    
+    @InteractionClient.slash_command(description="help")
+    async def help(self, inter):
+        await inter.respond("Hello from cog!")
+
 def comanndscog(bot):
     print('commandsファイルを読み込んだよ！')
     bot.add_cog(commands(bot))        
