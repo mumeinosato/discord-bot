@@ -5,6 +5,7 @@ from dislash import InteractionClient, slash_commands, Option, OptionType
 from janome.tokenizer import Tokenizer
 import markovify
 import subprocess
+from subprocess import PIPE
 import time
 
 bot = commands.Bot(command_prefix="mu:", help_command=None)
@@ -93,8 +94,7 @@ async def on_message(message):
             await channel.send(embed=embed)
 
     else:
-        path = 'marukovi.py'
-        subprocess.call('python %s' % path)
+        proc = subprocess.run(['python', 'marukovi.py'], stdout=PIPE, stderr=PIPE)
         time.sleep(3)
         with open('//home/mumeinosato/discord-bot/marukovi_output.txt', 'r') as fin:
             outget = fin.read()
