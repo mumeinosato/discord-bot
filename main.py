@@ -127,6 +127,7 @@ async def on_message(message):
             await channel.send(embed=embed)
 
     else:
+        text_split(text)
         for i in range(1):
             out = text_model_3.make_sentence(tries=100)
             print(out)
