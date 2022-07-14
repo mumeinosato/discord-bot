@@ -131,9 +131,10 @@ async def on_message(message):
         for i in range(1):
             out = text_model_3.make_sentence(tries=100)
             print(out)
-            f = open('/home/mumeinosato/discord-bot/marukovi_output.txt', 'w')
-            f.write(out)
-            f.close()
+            #f = open('/home/mumeinosato/discord-bot/marukovi_output.txt', 'w', encoding='UTF-8')
+            #f.write(text_model_3.make_sentence(tries=100))
+            #f.close()
+            await message.channel.send(out)    
 
     await bot.process_commands(message)
 
