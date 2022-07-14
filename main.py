@@ -123,7 +123,7 @@ async def on_message(message):
             await channel.send(embed=embed)
 
     else:
-        async with ctx.typing():
+        async with message.typing():
             text_split(text)
             splitted_text_str = text_split(text)
             text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
