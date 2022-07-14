@@ -123,17 +123,18 @@ async def on_message(message):
             await channel.send(embed=embed)
 
     else:
-        text_split(text)
-        splitted_text_str = text_split(text)
-        text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
-        for i in range(1):
-            out = text_model_3.make_sentence(tries=100)
-            sendout = out.replace(' ', '')
-            print(sendout)
-            #f = open('/home/mumeinosato/discord-bot/marukovi_output.txt', 'w', encoding='UTF-8')
-            #f.write(text_model_3.make_sentence(tries=100))
-            #f.close()
-            await message.channel.send(sendout)    
+        async with ctx.typing():
+            text_split(text)
+            splitted_text_str = text_split(text)
+            text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
+            for i in range(1):
+                out = text_model_3.make_sentence(tries=100)
+                sendout = out.replace(' ', '')
+                print(sendout)
+                #f = open('/home/mumeinosato/discord-bot/marukovi_output.txt', 'w', encoding='UTF-8')
+                #f.write(text_model_3.make_sentence(tries=100))
+                #f.close()
+                await message.channel.send(sendout)    
 
     await bot.process_commands(message)
 
