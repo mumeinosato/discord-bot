@@ -129,9 +129,6 @@ class Music(commands.Cog):
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("!"),
                    description='Relatively simple music bot example')
 
-@bot.event
-async def on_ready():
-    print('Logged in as {0} ({0.id})'.format(bot.user))
-    print('------')
-
-bot.add_cog(Music(bot))
+def comanndscog(bot):
+    print('youtubeファイルを読み込んだよ！')
+    bot.add_cog(Music(bot))  
