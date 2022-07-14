@@ -78,7 +78,7 @@ async def help(inter):#コマンドを定義するときの関数は必ずContex
 )
 async def register_word(inter, text=None):
     if text is not None:
-        f = open('/home/mumeinosato/discord-bot/markovi.txt', 'a', encoding='UTF-8')
+        f = open('/home/mumeinosato/discord-bot/marukovi.txt', 'a', encoding='UTF-8')
         f.write(""+text+"\n")
         f.close()
         await inter.reply("登録しました")
@@ -128,11 +128,12 @@ async def on_message(message):
         text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
         for i in range(1):
             out = text_model_3.make_sentence(tries=100)
-            print(out)
+            sendout = out.replace(' ', '')
+            print(sendout)
             #f = open('/home/mumeinosato/discord-bot/marukovi_output.txt', 'w', encoding='UTF-8')
             #f.write(text_model_3.make_sentence(tries=100))
             #f.close()
-            await message.channel.send(out)    
+            await message.channel.send(sendout)    
 
     await bot.process_commands(message)
 
