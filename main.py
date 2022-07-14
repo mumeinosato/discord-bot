@@ -123,7 +123,7 @@ async def on_message(message):
             await channel.send(embed=embed)
 
     else:
-        channel_name = message.content.replace()
+        channel_name = message.content.replace
         channel = discord.utils.get(message.guild.channels, name=channel_name)
         last_msg = await channel.fetch_message(channel.last_message_id)
         last_msg_content = last_msg.content
