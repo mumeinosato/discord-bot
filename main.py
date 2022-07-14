@@ -123,15 +123,15 @@ async def on_message(message):
             await channel.send(embed=embed)
 
     else:
-        channel_name = message.content.replace
-        channel = discord.utils.get(message.guild.channels, name=channel_name)
-        last_msg = await channel.fetch_message(channel.last_message_id)
-        last_msg_content = last_msg.content
-        print(last_msg_content)
-        f = open('/home/mumeinosato/discord-bot/marukovi.txt', 'a', encoding='UTF-8')
-        f.write(""+text+"\n")
-        f.close()
-        print("["+text+"]が登録されました")
+        #channel_name = message.content.replace
+        #channel = discord.utils.get(message.guild.channels, name=channel_name)
+        #last_msg = await channel.fetch_message(channel.last_message_id)
+        #last_msg_content = last_msg.content
+        #print(last_msg_content)
+        #f = open('/home/mumeinosato/discord-bot/marukovi.txt', 'a', encoding='UTF-8')
+        #f.write(""+text+"\n")
+        #f.close()
+        #print("["+text+"]が登録されました")
         text_split(text)
         splitted_text_str = text_split(text)
         text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
