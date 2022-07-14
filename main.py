@@ -12,7 +12,7 @@ bot = commands.Bot(command_prefix="mu:", help_command=None)
 slash = InteractionClient(bot)
 test_guilds = [706416588160499793]
 
-file = '/home/mumeinosato/discord-bot/markovi.txt' 
+file = '/home/mumeinosato/discord-bot/markuovi.txt' 
 f = open(file, 'r', encoding="utf-8")
 text = f.read()
 
