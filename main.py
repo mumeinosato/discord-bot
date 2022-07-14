@@ -12,9 +12,42 @@ bot = commands.Bot(command_prefix="mu:", help_command=None)
 slash = InteractionClient(bot)
 test_guilds = [706416588160499793]
 
+file = '/home/mumeinosato/discord-bot/markovi.txt' 
+f = open(file, 'r', encoding="utf-8")
+text = f.read()
+
 with open('/home/mumeinosato/discord-bot/token.txt', 'r') as fin:
     content = fin.read()
 token = content
+
+def text_split(text):
+    str_table = str.maketrans({
+        '。': '',   
+        '\n': '。',
+        '\r': '',
+        '(': '（',
+        ')': '）',
+        '[': '［',
+        ']': '］',
+        '"':'”',
+        "'":"’",
+    })
+    text = text.translate(str_table)
+    t = Tokenizer()
+    tokens = t.tokenize(text, wakati=True)
+    splitted_text_list = []
+    for i in tokens:
+        if i != '。' and i != '！' and i != '？':
+            i += ' '
+        elif i == '。' or i == '！' or i == '？':
+            i = '\n'
+        splitted_text_list.append(i)
+        splitted_text_str = "".join(splitted_text_list)
+
+    return splitted_text_str
+
+splitted_text_str = text_split(text)
+text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
 
 @bot.event
 async def on_ready():
@@ -94,11 +127,12 @@ async def on_message(message):
             await channel.send(embed=embed)
 
     else:
-        proc = subprocess.run(['python', 'marukovi.py'], stdout=PIPE, stderr=PIPE)
-        time.sleep(3)
-        with open('//home/mumeinosato/discord-bot/marukovi_output.txt', 'r') as fin:
-            outget = fin.read()
-        await message.channel.send(outget)
+        for i in range(1):
+            out = text_model_3.make_sentence(tries=100)
+            print(out)
+            f = open('/home/mumeinosato/discord-bot/marukovi_output.txt', 'w')
+            f.write(out)
+            f.close()
 
     await bot.process_commands(message)
 
