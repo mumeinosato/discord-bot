@@ -50,8 +50,8 @@ async def on_ready():
     await bot.change_presence(activity=discord.Game(f"ヘルプは mu:help | 導入サーバー数: {len(bot.guilds)}"))
     print("起動しました")
     from cogs import commands, youtube
-    await bot.add_cog(commands.commands, youtube.Music(bot))
-    #await bot.add_cog(Gchat.globalCog(bot))
+    await bot.add_cog(commands.commands(bot))
+    await bot.add_cog(youtube.Music(bot))
 
 @slash.command(
     name="help",
