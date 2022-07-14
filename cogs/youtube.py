@@ -7,7 +7,8 @@ from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
 import youtube_dl
 import ffmpeg
-import PyNaCl
+
+
 
 youtube_dl.utils.bug_reports_message = lambda: ''
 
