@@ -12,7 +12,7 @@ bot = commands.Bot(command_prefix="mu:", help_command=None)
 slash = InteractionClient(bot)
 test_guilds = [706416588160499793]
 
-with open('/home/mumeinosato/discord-bot/discord-bot/data/chatdata.txt', 'r', encoding="utf-8") as fin:
+with open('/home/mumeinosato/discord-bot/marukovi.txt', 'r', encoding="utf-8") as fin:
     text = fin.read()
 
 with open('/home/mumeinosato/discord-bot/token.txt', 'r') as fin:
