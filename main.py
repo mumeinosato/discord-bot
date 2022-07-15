@@ -124,7 +124,7 @@ async def on_message(message):
     else:
         guild = message.channel
         print(f"{guild.name}からメッセージが来ました！")
-        channelid = discord.utils.get(guild.channels, name=guild.name)
+        channelid = discord.utils.get(message.guild.channels, name=guild.name)
         channel = bot.get_channel(channelid)
         print(message.content)
         splitted_text_str = text_split(text)
