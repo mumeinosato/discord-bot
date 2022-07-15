@@ -122,8 +122,8 @@ async def on_message(message):
             await channel.send(embed=embed)
 
     else:
-        guild = message.guild.channels
-        print(f"{guild}からメッセージが来ました！")
+        guild = message.channel
+        print(f"{guild.name}からメッセージが来ました！")
         #channel = discord.utils.get(message.guild.channels)
         #print(channel)
         #last_msg = await channel.fetch_message(channel.last_message_id)
