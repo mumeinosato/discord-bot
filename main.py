@@ -121,11 +121,11 @@ async def on_message(message):
         for channel in global_channels:# メッセージを埋め込み形式で転送
             await channel.send(embed=embed)
 
-    elif message.content.startswith("こんにち"):
+    else:
         channel = discord.utils.get(message.guild.channels)
         print(channel)
-
-    else:
+        last_msg = await channel.fetch_message(channel.last_message_id)
+        print(last_msg)
         #last_msg_content = await bot.wait_for("message")    
         #channel_name = message.content.replace(message)
         #print(channel_name)
