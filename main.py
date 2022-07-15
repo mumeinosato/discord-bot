@@ -126,7 +126,6 @@ async def on_message(message):
         print(f"{guild.name}からメッセージが来ました！")
         channelid = discord.utils.get(guild.text_channels, name=guild.name)
         channel = bot.get_channel(channelid)
-        await channel.send(message.content)
         print(message.content)
         splitted_text_str = text_split(text)
         text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
