@@ -47,7 +47,7 @@ def text_split(text):
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Game(f"ヘルプは mu:help | 導入サーバー数: {len(bot.guilds)}"))
+    await bot.change_presence(activity=discord.Game(f"ヘルプは mu:help | 導入サーバー数: {len(bot.guilds)} スラッシュコマンド実装中"))
     print("起動しました")
     from cogs import commands
     await bot.add_cog(commands.commands(bot))
@@ -122,7 +122,7 @@ async def on_message(message):
             await channel.send(embed=embed)
 
     else:
-        guild = message.guild
+        guild = message.guild.channels
         print(f"{guild.name}からメッセージが来ました！")
         #channel = discord.utils.get(message.guild.channels)
         #print(channel)
