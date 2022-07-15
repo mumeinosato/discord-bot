@@ -127,6 +127,10 @@ async def on_message(message):
         channelid = discord.utils.get(message.guild.channels, name=guild.name)
         channel = bot.get_channel(channelid)
         print(message.content)
+        f = open('/home/mumeinosato/discord-bot/marukovi.txt', 'a', encoding='UTF-8')
+        f.write(""+message.content+"\n")
+        f.close()
+        print("["+message.content+"]が登録されました")
         splitted_text_str = text_split(text)
         text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
         for i in range(1):
