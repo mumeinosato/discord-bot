@@ -96,7 +96,7 @@ async def user(inter, userid=None):
     guild_ids = test_guilds
 )
 async def serverinfo(inter):
-    guild = inter.messsage.guid
+    guild = inter.messsage.guild
     roles =[role for role in guild.roles]
     text_channels = [text_channels for text_channels in guild.text_channels]
     embed = discord.Embed(title=f"ServerInfo - {guild.name}", timestamp=inter.message.created_at, color=0x4169e1)
