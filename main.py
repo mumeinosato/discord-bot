@@ -80,9 +80,9 @@ async def help(inter):#コマンドを定義するときの関数は必ずContex
     ],
     guild_ids = test_guilds
 )
-async def mcid(inter, text=None):
-    if text is not None:
-        await inter.reply("https://ja.namemc.com/profile/"+text)
+async def mcid(inter, mcid=None):
+    if mcid is not None:
+        await inter.reply("https://ja.namemc.com/profile/"+mcid)
     else:
         await inter.reply('MCIDを入力してください')
 
