@@ -91,7 +91,7 @@ async def user(inter, userid=None):
         await inter.reply('Useridを入力してください')
 
 @slash.command(
-    nmae="serverinfo",
+    name="serverinfo",
     description="サーバーの情報を表示します" ,
     guild_ids = test_guilds
 )
