@@ -6,7 +6,6 @@ from dislash import InteractionClient, slash_commands, Option, OptionType
 import asyncio
 from dataclasses import dataclass
 from fileinput import filename
-from matplotlib.pyplot import cla
 import youtube_dl
 import ffmpeg
 
@@ -72,10 +71,16 @@ class commands(commands.Cog):
         await ctx.send(embed=embed)#Contextにはいろいろな情報が入っており、そこから様々な関数、情報にアクセスできる。ctx.sendがその一つ
         
     @commands.command()
-    async def join(self, ctx, *, channel: discord.VoiceChannel):
-        if ctx.voice_bot is not None:
-            return await ctx.voice_bot.move_to(channel)
+    async def play(self, ctx, *, url):
+        channel = ctx.author.voice.channel
+        if channel is None:
+            return await ctx.send("VCに接続していません。")
+
         await channel.connect()
+        async with ctx.typing():
+            player = await YTDLSource.from_url(url, loop=self.bot.loop)
+            ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
+            await ctx.send("再生中：{}".format(player.title))
 
 def comanndscog(bot):
     print('commandsファイルを読み込んだよ！')
