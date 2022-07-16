@@ -73,12 +73,30 @@ async def help(inter):#コマンドを定義するときの関数は必ずContex
     await inter.send(embed=embed)#Contextにはいろいろな情報が入っており、そこから様々な関数、情報にアクセスできる。ctx.sendがその一つ
 
 @slash.command(
+    nmae="user",
+    description="Minecraftのユーザー情報を検索します(javaのみ)" ,
+    options = [
+        Option('userid', 'user', OptionType.STRING),
+    ],
+    guild_ids = test_guilds
+)
+async def user(inter, userid=None):
+    if userid is not None:
+        user = await bot.fetch_user(userid)
+        ###icon = await bot.avatar_url_as(usid)
+        embed = discord.Embed(title="ユーザー情報",description=str(user),color=0x4169e1)
+        ###embed.add_field(title="",value=icon)
+        await inter.send(embed=embed)
+        print(user.name, user.discriminator, str(user))    
+    else:
+        await inter.reply('Useridを入力してください')
+
+@slash.command(
     nmae="mcid",
     description="Minecraftのユーザー情報を検索します(javaのみ)" ,
     options = [
         Option('mcid', 'MCID', OptionType.STRING),
     ],
-    guild_ids = test_guilds
 )
 async def mcid(inter, mcid=None):
     if mcid is not None:
