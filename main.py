@@ -93,7 +93,7 @@ async def register_word(inter, text=None):
     nmae="mcid",
     description="Minecraftのユーザー情報を検索します(javaのみ)" ,
     options = [
-        Option('mcid', 'MCID', OptionType.STRING),
+        option('mcid', 'MCID', OptionType.STRING),
     ],
     guild_ids = test_guilds
 )
