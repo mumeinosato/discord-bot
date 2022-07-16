@@ -73,6 +73,20 @@ async def help(inter):#コマンドを定義するときの関数は必ずContex
     await inter.send(embed=embed)#Contextにはいろいろな情報が入っており、そこから様々な関数、情報にアクセスできる。ctx.sendがその一つ
 
 @slash.command(
+    nmae="mcid",
+    description="Minecraftのユーザー情報を検索します(javaのみ)" ,
+    options = [
+        Option('mcid', 'MCID', OptionType.STRING),
+    ],
+    guild_ids = test_guilds
+)
+async def register_word(inter, text=None):
+    if text is not None:
+        await inter.reply("https://ja.namemc.com/profile/"+text)
+    else:
+        await inter.reply('MCIDを入力してください')
+        
+@slash.command(
     nmae="register_word",
     description="AIの語句登録をします" ,
     options = [
@@ -86,24 +100,9 @@ async def register_word(inter, text=None):
         f.close()
         await inter.reply("登録しました")
         print("["+text+"]が登録されました")
-        return
     else:
         await inter.reply('引数がありません')
-        return
 
-@slash.command(
-    nmae="mcid",
-    description="Minecraftのユーザー情報を検索します(javaのみ)" ,
-    options = [
-        Option('mcid', 'MCID', OptionType.STRING),
-    ],
-    guild_ids = test_guilds
-)
-async def register_word(inter, text=None):
-    if text is not None:
-        await inter.reply("https://ja.namemc.com/profile/"+text)
-    else:
-        await inter.reply('MCIDを入力してください')
 
 @bot.event
 async def on_message(message):
