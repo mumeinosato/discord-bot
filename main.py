@@ -86,14 +86,16 @@ async def register_word(inter, text=None):
         f.close()
         await inter.reply("登録しました")
         print("["+text+"]が登録されました")
+        return
     else:
         await inter.reply('引数がありません')
+        return
 
 @slash.command(
     nmae="mcid",
     description="Minecraftのユーザー情報を検索します(javaのみ)" ,
     options = [
-        option('mcid', 'MCID', OptionType.STRING),
+        Option('mcid', 'MCID', OptionType.STRING),
     ],
     guild_ids = test_guilds
 )
