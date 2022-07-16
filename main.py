@@ -80,12 +80,12 @@ async def help(inter):#コマンドを定義するときの関数は必ずContex
     ],
     guild_ids = test_guilds
 )
-async def register_word(inter, text=None):
+async def mcid(inter, text=None):
     if text is not None:
         await inter.reply("https://ja.namemc.com/profile/"+text)
     else:
         await inter.reply('MCIDを入力してください')
-        
+
 @slash.command(
     nmae="register_word",
     description="AIの語句登録をします" ,
