@@ -121,6 +121,9 @@ async def on_message(message):
         for channel in global_channels:# メッセージを埋め込み形式で転送
             await channel.send(embed=embed)
 
+    elif message.content.startswith("mu:"):
+        return
+
     else:
         guild = message.channel
         print(f"{guild.name}からメッセージが来ました！")
