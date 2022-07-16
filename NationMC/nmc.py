@@ -58,9 +58,9 @@ async def on_message(message):
                 print("取得した文字列にhttpが入っていました")
             else:
                 f = open('/home/mumeinosato/discord-bot/marukovi.txt', 'a', encoding='UTF-8')
-                f.write(""+message.content+"\n")
+                f.write(""+getmsg+"\n")
                 f.close()
-                print("["+message.content+"]が登録されました")
+                print("["+getmsg+"]が登録されました")
                 splitted_text_str = text_split(text)
                 text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
                 for i in range(1):
