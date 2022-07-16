@@ -106,7 +106,7 @@ async def serverinfo(inter):
     embed.add_field(name=":arrow_forward:ロール数", value=f"{len(roles)}",inline=False)
     embed.add_field(name=":arrow_forward:サーバーブースター", value=guild.premium_subscription_count ,inline=False)
     embed.add_field(name=":arrow_forward:メンバー数", value=guild.member_count,inline=False)
-    embed.add_field(name=":arrow_forward:サーバー設立日", value="guild.created_at",inline=False)
+    embed.add_field(name=":arrow_forward:サーバー設立日", value=guild.created_at,inline=False)
     embed.set_footer(text=f"実行者:{inter.author}", icon_url=inter.author.avatar_url)
     await inter.send(embed=embed)
 
