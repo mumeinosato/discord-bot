@@ -210,21 +210,28 @@ async def on_message(message):
         print(f"{guild.name}からメッセージが来ました！")
         channelid = discord.utils.get(message.guild.channels, name=guild.name)
         channel = bot.get_channel(channelid)
-        print(message.content)
-        f = open('/home/mumeinosato/discord-bot/marukovi.txt', 'a', encoding='UTF-8')
-        f.write(""+message.content+"\n")
-        f.close()
-        print("["+message.content+"]が登録されました")
-        splitted_text_str = text_split(text)
-        text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
-        for i in range(1):
-            out = text_model_3.make_sentence(tries=100)
-            sendout = out.replace(' ', '')
-            print(sendout)
-            #f = open('/home/mumeinosato/discord-bot/marukovi_output.txt', 'w', encoding='UTF-8')
-            #f.write(text_model_3.make_sentence(tries=100))
-            #f.close()
-            await message.channel.send(sendout)    
+        getmsg = message.content 
+        print(getmsg)
+        if "@" in getmsg:
+            print("取得した文字列に@が入っていました")
+        else:
+            if "http" in getmsg:
+                print("取得した文字列にhttpが入っていました")
+            else:
+                f = open('/home/mumeinosato/discord-bot/marukovi.txt', 'a', encoding='UTF-8')
+                f.write(""+getmsg+"\n")
+                f.close()
+                print("["+getmsg+"]が登録されました")
+                splitted_text_str = text_split(text)
+                text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
+                for i in range(1):
+                    out = text_model_3.make_sentence(tries=100)
+                    sendout = out.replace(' ', '')
+                    print(sendout)
+                    #f = open('/home/mumeinosato/discord-bot/marukovi_output.txt', 'w', encoding='UTF-8')
+                    #f.write(text_model_3.make_sentence(tries=100))
+                    #f.close()
+                    await message.channel.send(sendout)    
 
     await bot.process_commands(message)
 
