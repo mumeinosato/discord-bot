@@ -74,11 +74,10 @@ async def help(inter):#コマンドを定義するときの関数は必ずContex
 
 @slash.command(
     nmae="user",
-    description="Minecraftのユーザー情報を検索します(javaのみ)" ,
+    description="IDからユーザーを検索します" ,
     options = [
         Option('userid', 'user', OptionType.STRING),
     ],
-    guild_ids = test_guilds
 )
 async def user(inter, userid=None):
     if userid is not None:
@@ -90,6 +89,26 @@ async def user(inter, userid=None):
         print(user.name, user.discriminator, str(user))    
     else:
         await inter.reply('Useridを入力してください')
+
+@slash.command(
+    nmae="serverinfo",
+    description="サーバーの情報を表示します" ,
+    guild_ids = test_guilds
+)
+async def serverinfo(inter):
+    guild = inter.messsage.guid
+    roles =[role for role in guild.roles]
+    text_channels = [text_channels for text_channels in guild.text_channels]
+    embed = discord.Embed(title=f"ServerInfo - {guild.name}", timestamp=inter.message.created_at, color=0x4169e1)
+    embed.set_thumbnail(url=inter.guild.icon_url)
+    embed.add_field(name=":arrow_forward:地域", value=f"{inter.guild.region}",inline=False)
+    embed.add_field(name=":arrow_forward:チャンネル数", value=f"{len(text_channels)}",inline=False)
+    embed.add_field(name=":arrow_forward:ロール数", value=f"{len(roles)}",inline=False)
+    embed.add_field(name=":arrow_forward:サーバーブースター", value=guild.premium_subscription_count ,inline=False)
+    embed.add_field(name=":arrow_forward:メンバー数", value=guild.member_count,inline=False)
+    embed.add_field(name=":arrow_forward:サーバー設立日", value="guild.created_at",inline=False)
+    embed.set_footer(text=f"実行者:{inter.author}", icon_url=inter.author.avatar_url)
+    await inter.send(embed=embed)
 
 @slash.command(
     nmae="mcid",
