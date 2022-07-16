@@ -11,6 +11,10 @@ import time
 bot = commands.Bot(command_prefix="mu:", help_command=None)
 slash = InteractionClient(bot)
 test_guilds = [706416588160499793]
+voice = None
+player = None
+discord_voice_channel_id = '711331627283906628' # 特定のボイスチャンネルを指定
+youtube_url = 'https://www.youtube.com/watch?v=sqcu2Pble2Y' # youtubeのURLを指定
 
 with open('/home/mumeinosato/discord-bot/marukovi.txt', 'r', encoding="utf-8") as fin:
     text = fin.read()
@@ -123,6 +127,46 @@ async def on_message(message):
 
     elif message.content.startswith("mu:"):
         return
+
+    elif message.content.startswith("!play"):
+        if message.author.voice_channel is None:
+            await bot.send_message(message.channel ,'ボイスチャンネルに参加してからコマンドを打ってください。')
+            return
+        if voice == None:
+            # ボイスチャンネルIDが未指定なら
+            if discord_voice_channel_id == '':
+                voice = await bot.join_voice_channel(message.author.voice_channel)
+            # ボイスチャンネルIDが指定されていたら
+            else:
+                voice = await bot.join_voice_channel(bot.get_channel(discord_voice_channel_id))
+        # 接続済みか確認
+        elif(voice.is_connected() == True):
+            # 再生中の場合は一度停止
+            if(player.is_playing()):
+                player.stop()
+            # ボイスチャンネルIDが未指定なら
+            if discord_voice_channel_id == '':
+                await voice.move_to(message.author.voice_channel)
+            # ボイスチャンネルIDが指定されていたら
+            else:
+                await voice.move_to(bot.get_channel(discord_voice_channel_id))
+        # youtubeからダウンロードし、再生
+        player = await voice.create_ytdl_player(youtube_url)
+        player.start()
+        return
+    
+    # 再生中の音楽を停止させる
+    elif message.content.startswith("!stop"):
+        if(player.is_playing()):
+                player.stop()
+                return
+    
+    # botをボイスチャットから切断させる
+    elif message.content.startswith("!disconnect"):
+        if voice is not None:
+            await voice.disconnect()
+            voice = None
+            return        
 
     else:
         guild = message.channel
