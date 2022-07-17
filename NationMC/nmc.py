@@ -3,6 +3,7 @@ import discord.ext
 from discord.ext import commands
 from janome.tokenizer import Tokenizer
 import markovify
+import random
 
 bot = commands.Bot(command_prefix="nm:", help_command=None)
 
@@ -57,22 +58,20 @@ async def on_message(message):
             if "http" in getmsg:
                 print("取得した文字列にhttpが入っていました")
             else:
-                f = open('/home/mumeinosato/discord-bot/marukovi.txt', 'a', encoding='UTF-8')
-                f.write(""+getmsg+"\n")
-                f.close()
-                print("["+getmsg+"]が登録されました")
-                """"
-                splitted_text_str = text_split(text)
-                text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
-                for i in range(1):
-                    out = text_model_3.make_sentence(tries=100)
-                    sendout = out.replace(' ', '')
-                    print(sendout)
-                    #f = open('/home/mumeinosato/discord-bot/marukovi_output.txt', 'w', encoding='UTF-8')
-                    #f.write(text_model_3.make_sentence(tries=100))
-                    #f.close()
-                    await message.channel.send(sendout)
-                """
+                x = random.randint(1,5)
+                print(x)
+                if x == 1:
+                    f = open('/home/mumeinosato/discord-bot/marukovi.txt', 'a', encoding='UTF-8')
+                    f.write(""+getmsg+"\n")
+                    f.close()
+                    print("["+getmsg+"]が登録されました")
+                    splitted_text_str = text_split(text)
+                    text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
+                    for i in range(1):
+                        out = text_model_3.make_sentence(tries=100)
+                        sendout = out.replace(' ', '')
+                        print(sendout)
+                        await message.channel.send(sendout)
     await bot.process_commands(message)                
 
 bot.run(token)    
