@@ -61,6 +61,7 @@ async def on_message(message):
                 f.write(""+getmsg+"\n")
                 f.close()
                 print("["+getmsg+"]が登録されました")
+                """"
                 splitted_text_str = text_split(text)
                 text_model_3 = markovify.NewlineText(splitted_text_str, state_size=3)
                 for i in range(1):
@@ -71,7 +72,7 @@ async def on_message(message):
                     #f.write(text_model_3.make_sentence(tries=100))
                     #f.close()
                     await message.channel.send(sendout)
-
+                """
     await bot.process_commands(message)                
 
 bot.run(token)    
