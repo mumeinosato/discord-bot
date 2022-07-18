@@ -9,3 +9,4 @@ pip3 install Janome
 pip3 install youtube_dl
 pip3 install ffmpeg-python
 pip3 install PyNaCl
+pip3 install googletrans

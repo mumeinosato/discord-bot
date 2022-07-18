@@ -9,49 +9,6 @@ from fileinput import filename
 import youtube_dl
 import ffmpeg
 
-youtube_dl.utils.bug_reports_message = lambda: ''
-
-
-ytdl_format_options = {
-    'format': 'bestaudio/best',
-    'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
-    'restrictfilenames': True,
-    'noplaylist': True,
-    'nocheckcertificate': True,
-    'ignoreerrors': False,
-    'logtostderr': False,
-    'quiet': True,
-    'no_warnings': True,
-    'default_search': 'auto',
-    'source_address': '0.0.0.0' # bind to ipv4 since ipv6 addresses cause issues sometimes
-}
-
-ffmpeg_options = {
-    'options': '-vn'
-}
-
-ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
-
-class YTDLSource(discord.PCMVolumeTransformer):
-    def __init__(self, source, *, data, volume=0.5):
-        super().__init__(source, volume)
-
-        self.data = data
-
-        self.title = data.get('title')
-        self.url = data.get('url')
-
-    @classmethod
-    async def from_url(cls, url, *, loop=None, stream=False):
-        loop = loop or asyncio.get_event_loop()
-        data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
-
-        if 'entries' in data:
-            # take first item from a playlist
-            data = data['entries'][0]
-
-        filename = data['url'] if stream else ytdl.prepare_filename(data)
-        return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
 
 class commands(commands.Cog):
     def __init__(self, bot):
@@ -69,7 +26,23 @@ class commands(commands.Cog):
         embed.add_field(name="**tool**", value="便利ツール一覧を表示します。",inline=False)
         embed.add_field(name="**servermanagement**", value="サーバー運営に役立つコマンド一覧を表示します。", inline=False)
         await ctx.send(embed=embed)#Contextにはいろいろな情報が入っており、そこから様々な関数、情報にアクセスできる。ctx.sendがその一つ
-        
+
+    @commands.command()
+    async def serverinfo(self, ctx):
+        guild = ctx.message.guild
+        roles =[role for role in guild.roles]
+        text_channels = [text_channels for text_channels in guild.text_channels]
+        embed = discord.Embed(title=f"ServerInfo - {guild.name}", timestamp=ctx.message.created_at, color=0x4169e1)
+        embed.set_thumbnail(url=ctx.guild.icon_url)
+        embed.add_field(name=":arrow_forward:地域", value=f"{ctx.guild.region}",inline=False)
+        embed.add_field(name=":arrow_forward:チャンネル数", value=f"{len(text_channels)}",inline=False)
+        embed.add_field(name=":arrow_forward:ロール数", value=f"{len(roles)}",inline=False)
+        embed.add_field(name=":arrow_forward:サーバーブースター", value=guild.premium_subscription_count ,inline=False)
+        embed.add_field(name=":arrow_forward:メンバー数", value=guild.member_count,inline=False)
+        embed.add_field(name=":arrow_forward:サーバー設立日", value=guild.created_at,inline=False)
+        embed.set_footer(text=f"実行者:{ctx.author}", icon_url=ctx.author.avatar_url)
+        await ctx.send(embed=embed)
+
 def comanndscog(bot):
     print('commandsファイルを読み込んだよ！')
     bot.add_cog(commands(bot))        

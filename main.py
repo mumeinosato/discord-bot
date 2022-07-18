@@ -2,8 +2,10 @@ import discord
 import discord.ext
 from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
+from interactions import Embed
 from janome.tokenizer import Tokenizer
 import markovify
+from googletrans import Translator
 import subprocess
 from subprocess import PIPE
 import time
@@ -11,6 +13,7 @@ import time
 bot = commands.Bot(command_prefix="mu:", help_command=None)
 slash = InteractionClient(bot)
 test_guilds = [706416588160499793]
+tr = Translator()
 voice = None
 player = None
 discord_voice_channel_id = '711331627283906628' # 特定のボイスチャンネルを指定
@@ -109,6 +112,31 @@ async def serverinfo(inter):
     embed.add_field(name=":arrow_forward:サーバー設立日", value=guild.created_at,inline=False)
     embed.set_footer(text=f"実行者:{inter.author}", icon_url=inter.author.avatar_url)
     await inter.send(embed=embed)
+
+@slash.command(
+    name="translation",
+    description="翻訳します" ,
+    options = [
+        Option('text', '翻訳する語句', OptionType.STRING),
+        Option('original_language', '元の言語', OptionType.STRING),
+        Option('target_language', '翻訳後の言語', OptionType.STRING),
+    ],
+    guild_ids = test_guilds
+)
+async def translation(inter, text=None, original_language=None, target_language=None):
+    if text is not None:
+        if original_language is not None:
+            result = tr.translate(text, src=original_language, dest=target_language).text
+            embed = discord.Embed(title="翻訳結果", color=0x4169e1)
+            embed.add_field(name=original_language+"→"+target_language, value=text+"--->"+result, inline=False)
+            await inter.send(embed=embed)
+        else:
+            result = tr.translate(text, src="en", dest="ja").text
+            embed = discord.Embed(title="翻訳結果", color=0x4169e1)
+            embed.add_field(name="日本語→英語", value=text+"--->"+result, inline=False)
+            await inter.send(embed=embed)
+    else:
+        await inter.reply('テキストを入力してください')   
 
 @slash.command(
     name="mcid",
