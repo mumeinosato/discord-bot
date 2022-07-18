@@ -2,7 +2,6 @@ import discord
 import discord.ext
 from discord.ext import commands
 from dislash import InteractionClient, slash_commands, Option, OptionType
-from interactions import Embed
 from janome.tokenizer import Tokenizer
 import markovify
 from googletrans import Translator
@@ -133,7 +132,7 @@ async def translation(inter, text=None, original_language=None, target_language=
         else:
             result = tr.translate(text, src="en", dest="ja").text
             embed = discord.Embed(title="翻訳結果", color=0x4169e1)
-            embed.add_field(name="日本語→英語", value=text+"--->"+result, inline=False)
+            embed.add_field(name="英語→日本語", value=text+"--->"+result, inline=False)
             await inter.send(embed=embed)
     else:
         await inter.reply('テキストを入力してください')   
