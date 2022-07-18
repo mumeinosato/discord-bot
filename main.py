@@ -123,6 +123,10 @@ async def serverinfo(inter):
     guild_ids = test_guilds
 )
 async def translation(inter, text=None, original_language=None, target_language=None):
+    print(text)
+    print(original_language)
+    print(target_language)
+    """"
     if text is not None:
         if original_language is not None:
             result = tr.translate(text, src=original_language, dest=target_language).text
@@ -136,6 +140,7 @@ async def translation(inter, text=None, original_language=None, target_language=
             await inter.send(embed=embed)
     else:
         await inter.reply('テキストを入力してください')   
+    """
 
 @slash.command(
     name="mcid",
