@@ -1,0 +1,12 @@
+pip3 install discord.py
+pip3 install dislash.py
+pip3 install Tokenizer
+pip3 install markovify
+pip3 install subprocess
+pip3 install numpy
+pip3 install pya3rt
+pip3 install Janome
+pip3 install youtube_dl
+pip3 install ffmpeg-python
+pip3 install PyNaCl
+pip3 install googletrans
