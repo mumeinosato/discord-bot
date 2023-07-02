@@ -18,7 +18,7 @@ class Mumeinosato(commands.Bot):
         )
 
     async def on_ready(self):
-        cog_dir = os.path.join(os.getcwd(), "./cogs")  # cogsディレクトリのパスを取得
+        cog_dir = os.path.join(os.getcwd(), "cogs")  # cogsディレクトリのパスを取得
         for file in os.listdir(cog_dir):
             if file.endswith('.py'):
                 try:
