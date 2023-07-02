@@ -18,15 +18,13 @@ class Mumeinosato(commands.Bot):
         )
 
     async def on_ready(self):
-        cog_dir = os.path.join(os.getcwd(), "cogs")  # cogsディレクトリのパスを取得
-        for file in os.listdir(cog_dir):
+        for file in os.path.basename('cogs'):
             if file.endswith('.py'):
                 try:
-                    cog_name = f"cogs.{file[:-3]}"  # 拡張子を取り除いた名前を取得
-                    self.load_extension(cog_name)
-                    print(f"Loaded cog: {cog_name}")
+                    await self.load_extension(f'cogs.{file[:-3]}')
+                    print(f"Loaded cogs: cogs.{file[:-3]}")
                 except Exception as e:
-                    print(f"{cog_name} failed to load", e)
+                    print(f"cogs.{file[:-3]} failed to load", e)
                     traceback.print_exc()
         try:
             await self.load_extension("jishaku") # Load jishaku
