@@ -11,14 +11,12 @@ class about(commands.Cog):
     @app_commands.command(name="help", description="helpを表示します")
     async def help(self, inter: discord.Interaction):
         embed = discord.Embed(title="ヘルプ", description="すべてスラッシュコマンドに対応する予定です", color=0x4169e1)
-        # ここに追加のコードが続く
-        embed.add_field(name="**help**", value="このコマンドです。", inline=False)
-        embed.add_field(name="**about**", value="botについてや、botの招待リンク、サポートサーバーを確認できます。", inline=False)
-        embed.add_field(name="**newinfo**", value="新着情報を確認します。", inline=False)
-        embed.add_field(name="**globalch**", value="「mumeinosato-global」というチャンネルを作成しグローバルチャットに接続します。", inline=False)
-        embed.add_field(name="**game**", value="このbotでできるゲーム一覧を表示します。", inline=False)
-        embed.add_field(name="**tool**", value="便利ツール一覧を表示します。", inline=False)
-        embed.add_field(name="**servermanagement**", value="サーバー運営に役立つコマンド一覧を表示します。", inline=False)
+        embed.add_field(name="**help**", value="このコマンドです", inline=False)
+        embed.add_field(name="**about**", value="botについてや、botの招待リンク、サポートサーバーを確認できます", inline=False)
+        embed.add_field(name="**globalch**", value="「mumeinosato-global」というチャンネルを作成しグローバルチャットに接続します", inline=False)
+        embed.add_field(name="**game**", value="このbotでできるゲーム一覧", inline=False)
+        embed.add_field(name="**tool**", value="便利ツール一覧", inline=False)
+        embed.add_field(name="**admin**", value="サーバー管理者のみ実行可能", inline=False)
         await inter.response.send_message(embed=embed)
 
     @app_commands.command(name="about", description="このbotについて")
