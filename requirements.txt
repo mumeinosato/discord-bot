@@ -8,5 +8,3 @@ python-dotenv
 mecab-python3
 pytz
 spacy
-chatterbot-corpus 
-ChatterBot
