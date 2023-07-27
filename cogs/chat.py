@@ -76,15 +76,15 @@ class chat(commands.Cog):
             except(KeyboardInterrupt, EOFError, SystemExit):
                 return
         
-        if message.channel.name == GLOBAL_CH_NAME:
-            await message.delete()
-            channels = self.bot.get_all_chanels()
-            global_channels = [ch for ch in channels if ch.name == GLOBAL_CH_NAME]
-            embed = discord.Embed(description=message.content, color=0x00bfff)
-            embed.set_author(name=message.author.display_name, icon_url=message.author.avatar_url_as(format="png"))
-            embed.set_footer(text=f"{message.guild.name}", icon_url=message.guild.icon_url_as(format="pmg"))
-            for channel in global_channels:
-                await channel.send(embed=embed)
+        ##if message.channel.name == GLOBAL_CH_NAME:
+        ##    await message.delete()
+        ##    channels = self.bot.get_all_chanels()
+        ##    global_channels = [ch for ch in channels if ch.name == GLOBAL_CH_NAME]
+        ##    embed = discord.Embed(description=message.content, color=0x00bfff)
+        ##    embed.set_author(name=message.author.display_name, icon_url=message.author.avatar_url_as(format="png"))
+        ##    embed.set_footer(text=f"{message.guild.name}", icon_url=message.guild.icon_url_as(format="pmg"))
+        ##    for channel in global_channels:
+        ##        await channel.send(embed=embed)
 
 async def setup(bot):
     await bot.add_cog(chat(bot))
